@@ -12,6 +12,9 @@
 
 #include "GameheavenDoc.h"
 #include "GameheavenView.h"
+#include "CDlgmain.h"
+#include "MainFrm.h"
+#include "ChildFrm.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -27,6 +30,7 @@ BEGIN_MESSAGE_MAP(CGameheavenView, CView)
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // CGameheavenView 생성/소멸
@@ -57,7 +61,18 @@ void CGameheavenView::OnDraw(CDC* /*pDC*/)
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
+	CDlgMain* pMain = new CDlgMain;
 
+	if (pMain->DoModal() == IDOK)		// DoModal()함수는 대화상자를 실행시킨다.
+	{
+		// 인스턴스 얻기
+		CMainFrame* pFrame = (CMainFrame*)AfxGetMainWnd();
+		CChildFrame* pChild = (CChildFrame*)pFrame->GetActiveFrame();
+		CGameheavenDoc* pDoc = (CGameheavenDoc*)pChild->GetActiveDocument();
+
+		UpdateData(TRUE);				// 데이터를 변수에 저장
+		Invalidate();				// 화면 갱신	
+	}
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 }
 
@@ -73,6 +88,7 @@ BOOL CGameheavenView::OnPreparePrinting(CPrintInfo* pInfo)
 void CGameheavenView::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
 	// TODO: 인쇄하기 전에 추가 초기화 작업을 추가합니다.
+
 }
 
 void CGameheavenView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
@@ -103,3 +119,5 @@ CGameheavenDoc* CGameheavenView::GetDocument() const // 디버그되지 않은 �
 
 
 // CGameheavenView 메시지 처리기
+
+

@@ -183,6 +183,8 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CDlgMain.h" />
+    <ClInclude Include="CDlgNonogram.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Gameheaven.h" />
@@ -194,6 +196,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CDlgMain.cpp" />
+    <ClCompile Include="CDlgNonogram.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="Gameheaven.cpp" />
     <ClCompile Include="GameheavenDoc.cpp" />
